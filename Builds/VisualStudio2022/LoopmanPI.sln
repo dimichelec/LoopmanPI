@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 17
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoopmanPI - Standalone Plugin", "LoopmanPI_StandalonePlugin.vcxproj", "{5C92A984-D1AF-8B59-15B8-222A91CBC37B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{66ADC493-9210-3A90-5551-00642C51451A} = {66ADC493-9210-3A90-5551-00642C51451A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoopmanPI - VST3", "LoopmanPI_VST3.vcxproj", "{F419A598-A27C-B22D-F72C-7489D6966A31}"
+	ProjectSection(ProjectDependencies) = postProject
+		{66ADC493-9210-3A90-5551-00642C51451A} = {66ADC493-9210-3A90-5551-00642C51451A}
+		{5163CBB3-5DE2-54DB-3F40-56934C368934} = {5163CBB3-5DE2-54DB-3F40-56934C368934}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoopmanPI - Shared Code", "LoopmanPI_SharedCode.vcxproj", "{66ADC493-9210-3A90-5551-00642C51451A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoopmanPI - VST3 Manifest Helper", "LoopmanPI_VST3ManifestHelper.vcxproj", "{5163CBB3-5DE2-54DB-3F40-56934C368934}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F419A598-A27C-B22D-F72C-7489D6966A31}.Debug|x64.ActiveCfg = Debug|x64
+		{F419A598-A27C-B22D-F72C-7489D6966A31}.Debug|x64.Build.0 = Debug|x64
+		{F419A598-A27C-B22D-F72C-7489D6966A31}.Release|x64.ActiveCfg = Release|x64
+		{F419A598-A27C-B22D-F72C-7489D6966A31}.Release|x64.Build.0 = Release|x64
+		{5C92A984-D1AF-8B59-15B8-222A91CBC37B}.Debug|x64.ActiveCfg = Debug|x64
+		{5C92A984-D1AF-8B59-15B8-222A91CBC37B}.Debug|x64.Build.0 = Debug|x64
+		{5C92A984-D1AF-8B59-15B8-222A91CBC37B}.Release|x64.ActiveCfg = Release|x64
+		{5C92A984-D1AF-8B59-15B8-222A91CBC37B}.Release|x64.Build.0 = Release|x64
+		{66ADC493-9210-3A90-5551-00642C51451A}.Debug|x64.ActiveCfg = Debug|x64
+		{66ADC493-9210-3A90-5551-00642C51451A}.Debug|x64.Build.0 = Debug|x64
+		{66ADC493-9210-3A90-5551-00642C51451A}.Release|x64.ActiveCfg = Release|x64
+		{66ADC493-9210-3A90-5551-00642C51451A}.Release|x64.Build.0 = Release|x64
+		{5163CBB3-5DE2-54DB-3F40-56934C368934}.Debug|x64.ActiveCfg = Debug|x64
+		{5163CBB3-5DE2-54DB-3F40-56934C368934}.Debug|x64.Build.0 = Debug|x64
+		{5163CBB3-5DE2-54DB-3F40-56934C368934}.Release|x64.ActiveCfg = Release|x64
+		{5163CBB3-5DE2-54DB-3F40-56934C368934}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
