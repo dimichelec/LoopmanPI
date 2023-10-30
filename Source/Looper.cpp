@@ -19,7 +19,7 @@ void Looper::prepare(double sampleRate)
 void Looper::resetLoop()
 {
     buffer.clear();
-    playHead = numLoops = loopStart[0] = loopEnd[0] = 0;
+    playHead = numLoops = maxRedoLoops = loopStart[0] = loopEnd[0] = 0;
     playState = recordState = false;
 }
 
@@ -53,7 +53,9 @@ void Looper::loopClick()
         {
             nextPos = 0;
             numLoops = 1;
+            maxRedoLoops = 0;
         }
+        maxRedoLoops++;
         buffer.clear(nextPos, loopSize());
         loopStart[numLoops - 1] = nextPos;
         loopEnd[numLoops - 1] = nextPos + playHead;
@@ -77,6 +79,7 @@ void Looper::stopLoop()
         else
         {
             loopEnd[numLoops - 1] = loopStart[numLoops - 1] + loopEnd[0];
+            maxRedoLoops++;
         }
         playHead = 0;
         recordState = false;
@@ -87,6 +90,20 @@ void Looper::stopLoop()
         playState = false;
     }
     repaintRequest = true;
+}
+
+void Looper::undoClick()
+{
+    if ((numLoops > 1) && !recordState) numLoops--;
+}
+
+void Looper::redoClick()
+{
+    if ((maxRedoLoops > 0) && !recordState)
+    {
+        numLoops++;
+        maxRedoLoops--;
+    }
 }
 
 void Looper::setLoopSample(int channel, float sample)

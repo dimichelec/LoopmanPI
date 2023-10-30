@@ -13,6 +13,8 @@ public:
     void resetLoop();
     void loopClick();
     void stopLoop();
+    void undoClick();
+    void redoClick();
 
     double getUsage() {
         return (double)loopEnd[ numLoops-1 ] / (double)buffer.getNumSamples();
@@ -48,6 +50,7 @@ public:
 
     int playHead{ 0 };
     int numLoops{ 0 };
+    int maxRedoLoops{ 0 };
     int loopStart[maxLoops]{ };
     int loopEnd[maxLoops]{ };
     int loopSize() { return ((numLoops == 0) ? 0 : loopEnd[0] + 1); }

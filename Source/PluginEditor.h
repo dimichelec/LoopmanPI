@@ -43,10 +43,12 @@ private:
         gainAttachment,
         loopLevelAttachment;
 
-    juce::TextButton loopButton, stopButton;
+    juce::TextButton loopButton, stopButton, undoButton, redoButton;
     juce::AudioProcessorValueTreeState::ButtonAttachment
         loopButtonAttachment,
-        stopButtonAttachment;
+        stopButtonAttachment,
+        undoButtonAttachment,
+        redoButtonAttachment;
 
     juce::Label playStateLabel;
     juce::Component loopPosition;

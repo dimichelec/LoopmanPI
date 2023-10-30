@@ -25,7 +25,9 @@ LoopmanPIAudioProcessor::LoopmanPIAudioProcessor()
         std::make_unique<juce::AudioParameterFloat>("gain",      "Gain",        0.0f, 1.0f, 1.0f ),
         std::make_unique<juce::AudioParameterFloat>("loopLevel", "Loop Level",  0.0f, 1.0f, 1.0f ),
         std::make_unique<juce::AudioParameterBool> ("loopButton","Loop Button", false),
-        std::make_unique<juce::AudioParameterBool> ("stopButton","Stop Button", false)
+        std::make_unique<juce::AudioParameterBool> ("stopButton","Stop Button", false),
+        std::make_unique<juce::AudioParameterBool> ("undoButton","Undo Button", false),
+        std::make_unique<juce::AudioParameterBool> ("redoButton","Redo Button", false)
     })
 {
 }

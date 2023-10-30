@@ -14,10 +14,12 @@
 //==============================================================================
 LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
-        gainAttachment          (p.state, "gain",       gainSlider),
-        loopLevelAttachment     (p.state, "loopLevel",  loopLevelKnob),
-        loopButtonAttachment    (p.state, "loopButton", loopButton),
-        stopButtonAttachment    (p.state, "stopButton", stopButton)
+        gainAttachment      (p.state, "gain",       gainSlider),
+        loopLevelAttachment (p.state, "loopLevel",  loopLevelKnob),
+        loopButtonAttachment(p.state, "loopButton", loopButton),
+        stopButtonAttachment(p.state, "stopButton", stopButton),
+        undoButtonAttachment(p.state, "undoButton", undoButton),
+        redoButtonAttachment(p.state, "redoButton", redoButton)
 {
     setSize (400, 300);
 
@@ -58,6 +60,16 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProc
     addAndMakeVisible(stopButton);
     stopButton.setButtonText("STOP");
     stopButton.onClick = [this]() { looper->stopLoop(); };
+
+    // undo button
+    addAndMakeVisible(undoButton);
+    undoButton.setButtonText("UNDO");
+    undoButton.onClick = [this]() { looper->undoClick(); };
+
+    // redo button
+    addAndMakeVisible(redoButton);
+    redoButton.setButtonText("REDO");
+    redoButton.onClick = [this]() { looper->redoClick(); };
 
     // memory usage bar
     addAndMakeVisible(memoryUsageBar);
@@ -142,10 +154,15 @@ void LoopmanPIAudioProcessorEditor::resized()
     juce::Rectangle<int> loopButtonBounds = buttonsBounds.removeFromLeft(buttonsBounds.getWidth() / 2);
     loopButton.setBounds(loopButtonBounds.reduced(smallMargin));
     stopButton.setBounds(buttonsBounds.reduced(smallMargin));
+    
+    buttonsBounds = bounds.removeFromRight(bounds.getWidth() / 2);
+    juce::Rectangle<int> undoButtonBounds = buttonsBounds.removeFromLeft(buttonsBounds.getWidth() / 2);
+    undoButton.setBounds(undoButtonBounds.reduced(smallMargin));
+    redoButton.setBounds(buttonsBounds.reduced(smallMargin));
 
     // memory usage bar
     const int barHeight = 24;
-    juce::Rectangle<int> memoryUsageBarBounds = bounds.removeFromTop(barHeight + smallMargin * 2).removeFromLeft(bounds.getWidth() / 2);
+    juce::Rectangle<int> memoryUsageBarBounds = bounds.removeFromTop(barHeight + smallMargin * 2);
     memoryUsageBar.setBounds(memoryUsageBarBounds.reduced(smallMargin));
 }
 
