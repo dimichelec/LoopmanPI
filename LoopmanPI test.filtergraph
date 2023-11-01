@@ -75,10 +75,10 @@
     </LAYOUT>
   </FILTER>
   <FILTER uid="10" x="0.325" y="0.4939024390243902" useARA="0" uiLastX_Normal="1805"
-          uiLastY_Normal="331" uiopen_Normal="0">
+          uiLastY_Normal="331" uiopen_Normal="1">
     <PLUGIN name="LoopmanPI" format="VST3" category="Fx|Sampler|Stereo|Tools"
             manufacturer="Carmen DiMichele" version="1.0.0" file="E:\Code Projects\LoopmanPI\Builds\VisualStudio2022\x64\Debug\VST3\LoopmanPI.vst3\Contents\x86_64-win\LoopmanPI.vst3"
-            uniqueId="ef9ba320" isInstrument="0" fileTime="18b8105bbd4" infoUpdateTime="18b81083bb9"
+            uniqueId="ef9ba320" isInstrument="0" fileTime="18b8105bbd4" infoUpdateTime="18b896ca16c"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="e9520284"/>
     <STATE>615.VMjLg3k....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9LyM23hUMoFSmA0Tt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSEUUPQUUp8zMtTETRUDUSYlZFkENHgVVqUkQYgVQwfUbIIDRwTjQgASUV8DZtj1RwPzPLYmKCwjcDMTS44xTMcGQC0jLHg2R4X2PTETRUAUSAIkVpASZH0VQVoEcIIDRwTjQgASUV8DZDk1R1gDdKkicCQUPIUETMEjTZoFLogzbqYDYn4BZic1cVM1ZvjFR1MiTMYmZS4DMpMkSz3xPMECSowDLXMjSncCZOciKUAkTEQ0TlolQYgCRBEVc3XjXLUEais1crgjYXcEVxU0UYgCRRwDctjFR0MyPOAUQpQUPvPDRuEkUOglcwDVcA0FTvD0QiUGMrgTcyLzSPUjZTEDLDgzaQY0SnwzQiUWPsAELQczX0QCaHU2LC8DTEoFUAACQH8VTV8DZHcUVpgCaPASTGMVczvFR0MyPOAUQpQUPvPDRuEkUOgFUsElZ3vFTvD0QiUGMrgTcyLzS0wTQUETTUEUNt3hKt3hKt3hKt3hKtQUUCUEQTg2ZrM1YQcUVDUjQicVPP4RPHQEY1UTLhkWPP4RPL4hKi4hKt3hKt3hKtXlTU0DUQAURWoULEYzXqEEUXoWQFwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
@@ -91,7 +91,8 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <CONNECTION srcFilter="1" srcChannel="0" dstFilter="10" dstChannel="0"/>
+  <CONNECTION srcFilter="1" srcChannel="1" dstFilter="10" dstChannel="0"/>
+  <CONNECTION srcFilter="1" srcChannel="1" dstFilter="10" dstChannel="1"/>
   <CONNECTION srcFilter="2" srcChannel="4096" dstFilter="6" dstChannel="4096"/>
   <CONNECTION srcFilter="2" srcChannel="4096" dstFilter="10" dstChannel="4096"/>
   <CONNECTION srcFilter="6" srcChannel="1" dstFilter="10" dstChannel="1"/>
