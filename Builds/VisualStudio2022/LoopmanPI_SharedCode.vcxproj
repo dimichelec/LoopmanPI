@@ -139,6 +139,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\LoopPosition.cpp"/>
     <ClCompile Include="..\..\Source\LoopmanKnob.cpp"/>
     <ClCompile Include="..\..\Source\Looper.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
@@ -2407,6 +2408,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LoopPosition.h"/>
     <ClInclude Include="..\..\Source\LoopmanKnob.h"/>
     <ClInclude Include="..\..\Source\Looper.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>

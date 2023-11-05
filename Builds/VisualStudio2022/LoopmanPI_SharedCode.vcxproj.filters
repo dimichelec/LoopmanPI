@@ -598,6 +598,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\LoopPosition.cpp">
+      <Filter>LoopmanPI\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\LoopmanKnob.cpp">
       <Filter>LoopmanPI\Source</Filter>
     </ClCompile>
@@ -3039,6 +3042,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LoopPosition.h">
+      <Filter>LoopmanPI\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\LoopmanKnob.h">
       <Filter>LoopmanPI\Source</Filter>
     </ClInclude>

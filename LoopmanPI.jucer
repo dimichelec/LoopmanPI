@@ -15,6 +15,9 @@
       <FILE id="nA0pWI" name="undoButton.png" compile="0" resource="1" file="Source/Assets/undoButton.png"/>
     </GROUP>
     <GROUP id="{1A7E6732-E380-29B3-FB53-191D0ED3CB17}" name="Source">
+      <FILE id="YS4my6" name="LoopPosition.cpp" compile="1" resource="0"
+            file="Source/LoopPosition.cpp"/>
+      <FILE id="uw3eT9" name="LoopPosition.h" compile="0" resource="0" file="Source/LoopPosition.h"/>
       <FILE id="q2yqmw" name="LoopmanKnob.cpp" compile="1" resource="0" file="Source/LoopmanKnob.cpp"/>
       <FILE id="TRzsXn" name="LoopmanKnob.h" compile="0" resource="0" file="Source/LoopmanKnob.h"/>
       <FILE id="acYIY3" name="Looper.h" compile="0" resource="0" file="Source/Looper.h"/>

@@ -22,11 +22,8 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProc
     backgroundImage = juce::ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
     setSize(backgroundImage.getWidth() / backgroundScale, backgroundImage.getHeight() / backgroundScale);
 
-    // looper position and status component
-    addAndMakeVisible(loopPosition);
-    addAndMakeVisible(playStateLabel);
-    playStateLabel.setJustificationType(juce::Justification::centred);
-    playStateLabel.setColour(juce::Label::textColourId, juce::Colours::black);
+    // loop position
+    loopPosition.setLooper(looper);
 
     // mix knob
     addAndMakeVisible(mixKnob);
@@ -74,38 +71,7 @@ void LoopmanPIAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillAll(juce::Colours::white);
     g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
 
-    // the play state indicator
-    auto loops = looper->numLoops;
-    juce::String txt{ "" };
-    if (loops > 0)
-        txt = juce::String(loops) + " loop" + ((loops > 1) ? "s" : "");
-    playStateLabel.setColour(juce::Label::textColourId, juce::Colours::orangered);
-    playStateLabel.setFont(22.0f);
-    playStateLabel.setText(txt, juce::dontSendNotification);
-
-    // draw loop poisiton
-    float x0 = (float)loopPosition.getX(), y0 = (float)loopPosition.getY();
-    float cx = x0 + (float)loopPosition.getWidth() / 2;
-    float cy = y0 + (float)loopPosition.getHeight() / 2;
-    float rad = (float)loopPosition.getWidth() / 2 - 20;
-
-    g.setColour(getLookAndFeel().findColour(juce::TextButton::buttonColourId));
-    g.drawEllipse(cx - rad, cy - rad, rad * 2, rad * 2, 2);
-
-    float pos = looper->getPlayPosition();
-    if (pos < 0)
-    {
-        g.setColour(juce::Colours::goldenrod);
-        g.drawEllipse(cx - rad, cy - rad, rad * 2, rad * 2, 8);
-    }
-    else {
-        juce::PathStrokeType stroke(8);
-        stroke.setEndStyle(juce::PathStrokeType::EndCapStyle::rounded);
-        juce::Path path;
-        path.addCentredArc(cx, cy, rad, rad, 0, 0, pos * 2 * juce::float_Pi, true);
-        g.setColour((looper->isRecording()) ? juce::Colours::red : juce::Colours::green);
-        g.strokePath(path, stroke);
-    }
+    loopPosition.paint(g);
 
     // color memory usage bar
     auto color = getLookAndFeel().findColour(juce::Label::backgroundColourId);
@@ -129,13 +95,6 @@ void LoopmanPIAudioProcessorEditor::resized()
     juce::Rectangle<int> loopPositionBounds = juce::Rectangle<int>(bigMargin, controlsTop, loopPositionSize, loopPositionSize);
     loopPosition.setBounds(loopPositionBounds);
 
-    // play state label
-    playStateLabel.setBounds(
-        loopPosition.getBounds().removeFromTop(
-            loopPosition.getHeight() * 2 / 3
-        ).removeFromBottom(30).reduced(30,0).translated(0, -10)
-    );
-
     // undo/redo buttons
     const int buttonSize = 50;
     juce::Rectangle<int> undoButtonBounds = juce::Rectangle<int>(
@@ -154,7 +113,7 @@ void LoopmanPIAudioProcessorEditor::resized()
     // memory usage bar
     const int barHeight = 24;
     juce::Rectangle<int> memoryUsageBarBounds = juce::Rectangle<int>(margin, undoButton.getBottom() + margin, getWidth() - (2 * margin), barHeight);
-    memoryUsageBar.setBounds(memoryUsageBarBounds); // .reduced(smallMargin));
+    memoryUsageBar.setBounds(memoryUsageBarBounds);
 }
 
 void LoopmanPIAudioProcessorEditor::buttonClicked(juce::Button*) // button)

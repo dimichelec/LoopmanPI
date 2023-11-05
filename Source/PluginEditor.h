@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "Looper.h"
 #include "LoopmanKnob.h"
+#include "LoopPosition.h"
 
 
 //==============================================================================
@@ -49,8 +50,9 @@ private:
         undoButtonAttachment,
         redoButtonAttachment;
 
-    juce::Label playStateLabel;
-    juce::Component loopPosition;
+    LoopPosition loopPosition;
+    //juce::Label playStateLabel;
+    //juce::Component loopPosition;
 
     double memoryUsage { looper->getUsage() };
     juce::ProgressBar memoryUsageBar { memoryUsage };
