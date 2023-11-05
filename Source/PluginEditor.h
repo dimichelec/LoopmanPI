@@ -11,6 +11,8 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "Looper.h"
+#include "LoopmanKnob.h"
+
 
 //==============================================================================
 /**
@@ -33,17 +35,14 @@ private:
     LoopmanPIAudioProcessor& audioProcessor;
     Looper* looper = &audioProcessor.looper;
 
-    juce::Slider gainSlider;
-    juce::Label gainLabel;
+    juce::Image backgroundImage;
+    const int backgroundScale {2};
 
-    juce::Slider loopLevelKnob;
-    juce::Label loopLevelLabel;
-
+    LoopmanKnob mixKnob;
     juce::AudioProcessorValueTreeState::SliderAttachment
-        gainAttachment,
-        loopLevelAttachment;
+        mixAttachment;
 
-    juce::TextButton loopButton, stopButton, undoButton, redoButton;
+    juce::ImageButton loopButton, stopButton, undoButton, redoButton;
     juce::AudioProcessorValueTreeState::ButtonAttachment
         loopButtonAttachment,
         stopButtonAttachment,

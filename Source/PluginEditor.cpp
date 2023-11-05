@@ -10,65 +10,49 @@
 #include "PluginEditor.h"
 
 
-
 //==============================================================================
 LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
-        gainAttachment      (p.state, "gain",       gainSlider),
-        loopLevelAttachment (p.state, "loopLevel",  loopLevelKnob),
+        mixAttachment       (p.state, "mix",        mixKnob),
         loopButtonAttachment(p.state, "loopButton", loopButton),
         stopButtonAttachment(p.state, "stopButton", stopButton),
         undoButtonAttachment(p.state, "undoButton", undoButton),
         redoButtonAttachment(p.state, "redoButton", redoButton)
 {
-    setSize (400, 300);
-
-    // erase boxes around slider control value textboxes
-    getLookAndFeel().setColour(juce::Slider::textBoxOutlineColourId, getLookAndFeel().findColour(juce::Slider::textBoxBackgroundColourId));
-
-    // loop level control
-    addAndMakeVisible(loopLevelLabel);
-    loopLevelLabel.setText("Loop Level", juce::dontSendNotification);
-    loopLevelLabel.setJustificationType(juce::Justification::centred);
-    loopLevelLabel.attachToComponent(&loopLevelKnob, false);
-
-    addAndMakeVisible(loopLevelKnob);
-    loopLevelKnob.setSliderStyle(juce::Slider::Rotary);
-    loopLevelKnob.setTextBoxStyle(juce::Slider::TextBoxBelow, true, loopLevelKnob.getWidth(), 30);
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
+    setSize(backgroundImage.getWidth() / backgroundScale, backgroundImage.getHeight() / backgroundScale);
 
     // looper position and status component
     addAndMakeVisible(loopPosition);
     addAndMakeVisible(playStateLabel);
     playStateLabel.setJustificationType(juce::Justification::centred);
+    playStateLabel.setColour(juce::Label::textColourId, juce::Colours::black);
 
-    // output gain control
-    addAndMakeVisible(gainLabel);
-    gainLabel.setText("Output", juce::dontSendNotification);
-    gainLabel.setJustificationType(juce::Justification::centred);
-    gainLabel.attachToComponent(&gainSlider, false);
-
-    addAndMakeVisible(gainSlider);
-    gainSlider.setSliderStyle(juce::Slider::LinearVertical);
-    gainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 200, 30);
+    // mix knob
+    addAndMakeVisible(mixKnob);
 
     // loop button
     addAndMakeVisible(loopButton);
-    loopButton.setButtonText("LOOP");
+    juce::Image normalButton = juce::ImageCache::getFromMemory(BinaryData::loopButton_png, BinaryData::loopButton_pngSize);
+    loopButton.setImages(true, false, true, normalButton, 1.0f, {}, {}, 1.0f, {}, {}, 0.5f, {});
     loopButton.onClick = [this]() { looper->loopClick(); };
 
     // stop button
     addAndMakeVisible(stopButton);
-    stopButton.setButtonText("STOP");
+    normalButton = juce::ImageCache::getFromMemory(BinaryData::stopButton_png, BinaryData::stopButton_pngSize);
+    stopButton.setImages(true, false, true, normalButton, 1.0f, {}, {}, 1.0f, {}, {}, 0.5f, {});
     stopButton.onClick = [this]() { looper->stopLoop(); };
 
     // undo button
     addAndMakeVisible(undoButton);
-    undoButton.setButtonText("UNDO");
+    normalButton = juce::ImageCache::getFromMemory(BinaryData::undoButton_png, BinaryData::undoButton_pngSize);
+    undoButton.setImages(true, false, true, normalButton, 1.0f, {}, {}, 1.0f, {}, {}, 0.5f, {});
     undoButton.onClick = [this]() { looper->undoClick(); };
 
     // redo button
     addAndMakeVisible(redoButton);
-    redoButton.setButtonText("REDO");
+    normalButton = juce::ImageCache::getFromMemory(BinaryData::redoButton_png, BinaryData::redoButton_pngSize);
+    redoButton.setImages(true, false, true, normalButton, 1.0f, {}, {}, 1.0f, {}, {}, 0.5f, {});
     redoButton.onClick = [this]() { looper->redoClick(); };
 
     // memory usage bar
@@ -87,13 +71,16 @@ LoopmanPIAudioProcessorEditor::~LoopmanPIAudioProcessorEditor()
 //==============================================================================
 void LoopmanPIAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+    g.fillAll(juce::Colours::white);
+    g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
 
     // the play state indicator
     auto loops = looper->numLoops;
     juce::String txt{ "" };
     if (loops > 0)
         txt = juce::String(loops) + " loop" + ((loops > 1) ? "s" : "");
+    playStateLabel.setColour(juce::Label::textColourId, juce::Colours::orangered);
+    playStateLabel.setFont(22.0f);
     playStateLabel.setText(txt, juce::dontSendNotification);
 
     // draw loop poisiton
@@ -129,41 +116,45 @@ void LoopmanPIAudioProcessorEditor::paint (juce::Graphics& g)
 
 void LoopmanPIAudioProcessorEditor::resized()
 {
-    juce::Rectangle<int> bounds = getLocalBounds();
-    const int margin = 20, smallMargin = 5, topMargin = 15;
-    
-    // output gain control
-    juce::Rectangle<int> gainBounds = bounds.removeFromRight(getWidth() / 4);
-    gainSlider.setBounds(gainBounds.reduced(margin).translated(0, topMargin));
+    const int controlsTop = 190;
 
-    // knobs
-    juce::Rectangle<int> knobsBounds = bounds.removeFromTop(getHeight() / 2).translated(0, topMargin);
-    juce::Rectangle<int> loopLevel = knobsBounds.removeFromLeft(knobsBounds.getWidth() / 2);
-    loopLevelKnob.setBounds(loopLevel.reduced(margin));
-    loopPosition.setBounds(knobsBounds.reduced(smallMargin, margin/2).translated(0, -margin/2));
+    juce::Rectangle<int> bounds = getLocalBounds();
+    const int margin = 20, smallMargin = 5, bigMargin = 30, topMargin = 15;
+    const int mixKnobSize = 120, loopPositionSize = 150;
+    
+    // mix knob
+    mixKnob.setBounds(getWidth() - mixKnobSize - bigMargin - 15, controlsTop + topMargin, mixKnobSize, mixKnobSize);
+
+    // loop position
+    juce::Rectangle<int> loopPositionBounds = juce::Rectangle<int>(bigMargin, controlsTop, loopPositionSize, loopPositionSize);
+    loopPosition.setBounds(loopPositionBounds);
 
     // play state label
     playStateLabel.setBounds(
         loopPosition.getBounds().removeFromTop(
             loopPosition.getHeight() * 2 / 3
-        ).removeFromBottom(30).reduced(30,0).translated(0, -7)
+        ).removeFromBottom(30).reduced(30,0).translated(0, -10)
     );
 
-    // buttons
-    juce::Rectangle<int> buttonsBounds = bounds.removeFromTop(getHeight() / 4);
-    juce::Rectangle<int> loopButtonBounds = buttonsBounds.removeFromLeft(buttonsBounds.getWidth() / 2);
-    loopButton.setBounds(loopButtonBounds.reduced(smallMargin));
-    stopButton.setBounds(buttonsBounds.reduced(smallMargin));
+    // undo/redo buttons
+    const int buttonSize = 50;
+    juce::Rectangle<int> undoButtonBounds = juce::Rectangle<int>(
+        loopPositionBounds.getCentreX() - buttonSize - smallMargin / 2, loopPositionBounds.getBottom() - smallMargin, buttonSize, buttonSize);
+    undoButton.setBounds(undoButtonBounds);
+    juce::Rectangle<int> redoButtonBounds = undoButtonBounds.translated(buttonSize + smallMargin, 0);
+    redoButton.setBounds(redoButtonBounds);
+        
+    // loop/stop buttons
+    const int buttonTop = getHeight() - 97 - smallMargin;
+    juce::Rectangle<int> loopButtonBounds = juce::Rectangle<int>(smallMargin, buttonTop, getWidth() / 2, 100);
+    loopButton.setBounds(loopButtonBounds);
+    juce::Rectangle<int> stopButtonBounds = juce::Rectangle<int>(getWidth() - 190 - smallMargin, buttonTop, getWidth() / 2, 100);
+    stopButton.setBounds(stopButtonBounds);
     
-    buttonsBounds = bounds.removeFromRight(bounds.getWidth() / 2);
-    juce::Rectangle<int> undoButtonBounds = buttonsBounds.removeFromLeft(buttonsBounds.getWidth() / 2);
-    undoButton.setBounds(undoButtonBounds.reduced(smallMargin));
-    redoButton.setBounds(buttonsBounds.reduced(smallMargin));
-
     // memory usage bar
     const int barHeight = 24;
-    juce::Rectangle<int> memoryUsageBarBounds = bounds.removeFromTop(barHeight + smallMargin * 2);
-    memoryUsageBar.setBounds(memoryUsageBarBounds.reduced(smallMargin));
+    juce::Rectangle<int> memoryUsageBarBounds = juce::Rectangle<int>(margin, undoButton.getBottom() + margin, getWidth() - (2 * margin), barHeight);
+    memoryUsageBar.setBounds(memoryUsageBarBounds); // .reduced(smallMargin));
 }
 
 void LoopmanPIAudioProcessorEditor::buttonClicked(juce::Button*) // button)

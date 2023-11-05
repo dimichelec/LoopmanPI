@@ -22,8 +22,9 @@ LoopmanPIAudioProcessor::LoopmanPIAudioProcessor()
                        )
 #endif
     , state (*this, nullptr, "STATE", {
-        std::make_unique<juce::AudioParameterFloat>("gain",      "Gain",        0.0f, 1.0f, 1.0f ),
-        std::make_unique<juce::AudioParameterFloat>("loopLevel", "Loop Level",  0.0f, 1.0f, 1.0f ),
+        //std::make_unique<juce::AudioParameterFloat>("gain",      "Gain",        0.0f, 1.0f, 1.0f ),
+        //std::make_unique<juce::AudioParameterFloat>("loopLevel", "Loop Level",  0.0f, 1.0f, 1.0f ),
+        std::make_unique<juce::AudioParameterFloat>("mix",       "Mix",        0.0f, 1.0f, 1.0f),
         std::make_unique<juce::AudioParameterBool> ("loopButton","Loop Button", false),
         std::make_unique<juce::AudioParameterBool> ("stopButton","Stop Button", false),
         std::make_unique<juce::AudioParameterBool> ("undoButton","Undo Button", false),
@@ -154,8 +155,9 @@ void LoopmanPIAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         buffer.clear (i, 0, buffer.getNumSamples());
 
     // get control settings
-    auto gain = state.getParameter("gain")->getValue();
-    auto loopLevel = state.getParameter("loopLevel")->getValue();
+    //auto gain = state.getParameter("gain")->getValue();
+    //auto loopLevel = state.getParameter("loopLevel")->getValue();
+    auto mix = state.getParameter("mix")->getValue();
 
     // process the loop buffer
     for (auto channel = 0; channel < totalNumInputChannels; ++channel)
@@ -164,7 +166,7 @@ void LoopmanPIAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         for (auto i = 0; i < buffer.getNumSamples(); i++)
         {
             auto drySample = channelData[i];
-            channelData[i] = gain * (drySample + (loopLevel * looper.getPlaySample(channel)));
+            channelData[i] = drySample + (mix * looper.getPlaySample(channel));
             looper.setLoopSample(channel, drySample);
         }
     }
