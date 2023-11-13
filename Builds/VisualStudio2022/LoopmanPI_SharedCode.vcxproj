@@ -139,9 +139,6 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\LoopPosition.cpp"/>
-    <ClCompile Include="..\..\Source\LoopmanKnob.cpp"/>
-    <ClCompile Include="..\..\Source\Looper.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="C:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
@@ -2408,6 +2405,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LoopmanMemoryBar.h"/>
     <ClInclude Include="..\..\Source\LoopPosition.h"/>
     <ClInclude Include="..\..\Source\LoopmanKnob.h"/>
     <ClInclude Include="..\..\Source\Looper.h"/>
@@ -3366,11 +3364,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\Assets\background.png"/>
-    <None Include="..\..\Source\Assets\knob.png"/>
-    <None Include="..\..\Source\Assets\loopButton.png"/>
-    <None Include="..\..\Source\Assets\redoButton.png"/>
-    <None Include="..\..\Source\Assets\stopButton.png"/>
-    <None Include="..\..\Source\Assets\undoButton.png"/>
+    <None Include="..\..\Source\Assets\buttonBlank.png"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="C:\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>

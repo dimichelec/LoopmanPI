@@ -19,16 +19,53 @@
 class LoopPosition  : public juce::Component
 {
 public:
-    LoopPosition();
-    ~LoopPosition() override;
+    LoopPosition() {}
+    ~LoopPosition() override {}
 
-    void paint (juce::Graphics&) override;
-    void resized() override;
+    void paint(juce::Graphics& g) override
+    {
+        // update playState label
+        juce::String txt{ "" };
+        auto loops = looper->numLoops;
+        if (loops > 0)
+            txt = juce::String(loops) + " loop" + ((loops > 1) ? "s" : "");
+        g.setColour(labelColor);
+        g.setFont(20.0f);
+        g.drawText(txt, getBounds(), juce::Justification::centred, true);
+
+        // draw loop poisiton
+        float trackWeight = 7.0f;
+        float x0 = (float)getX(), y0 = (float)getY();
+        float cx = x0 + (float)getWidth() / 2;
+        float cy = y0 + (float)getHeight() / 2;
+        float rad = (float)getWidth() / 2 - trackWeight;
+
+        g.setColour(labelColor);
+        g.drawEllipse(cx - rad, cy - rad, rad * 2, rad * 2, trackWeight);
+
+        float pos = looper->getPlayPosition();
+        if (pos < 0)
+        {
+            g.setColour(juce::Colours::goldenrod);
+            g.drawEllipse(cx - rad, cy - rad, rad * 2, rad * 2, trackWeight);
+        }
+        else {
+            juce::PathStrokeType stroke(8);
+            stroke.setEndStyle(juce::PathStrokeType::EndCapStyle::rounded);
+            juce::Path path;
+            path.addCentredArc(cx, cy, rad, rad, 0, 0, pos * 2 * juce::float_Pi, true);
+            g.setColour((looper->isRecording()) ? juce::Colours::red : juce::Colours::green);
+            g.strokePath(path, stroke);
+        }
+    }
+
+    void resized() override {}
 
     void setLooper(Looper* ptr) { looper = ptr; }
 
 private:
     Looper* looper{};
+    const juce::Colour labelColor = juce::Colour(0xff2d1111);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LoopPosition)
 };

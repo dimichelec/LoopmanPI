@@ -598,15 +598,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\LoopPosition.cpp">
-      <Filter>LoopmanPI\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\LoopmanKnob.cpp">
-      <Filter>LoopmanPI\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Looper.cpp">
-      <Filter>LoopmanPI\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>LoopmanPI\Source</Filter>
     </ClCompile>
@@ -3042,6 +3033,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LoopmanMemoryBar.h">
+      <Filter>LoopmanPI\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\LoopPosition.h">
       <Filter>LoopmanPI\Source</Filter>
     </ClInclude>
@@ -5912,19 +5906,7 @@
     <None Include="..\..\Source\Assets\background.png">
       <Filter>LoopmanPI\Assets</Filter>
     </None>
-    <None Include="..\..\Source\Assets\knob.png">
-      <Filter>LoopmanPI\Assets</Filter>
-    </None>
-    <None Include="..\..\Source\Assets\loopButton.png">
-      <Filter>LoopmanPI\Assets</Filter>
-    </None>
-    <None Include="..\..\Source\Assets\redoButton.png">
-      <Filter>LoopmanPI\Assets</Filter>
-    </None>
-    <None Include="..\..\Source\Assets\stopButton.png">
-      <Filter>LoopmanPI\Assets</Filter>
-    </None>
-    <None Include="..\..\Source\Assets\undoButton.png">
+    <None Include="..\..\Source\Assets\buttonBlank.png">
       <Filter>LoopmanPI\Assets</Filter>
     </None>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">

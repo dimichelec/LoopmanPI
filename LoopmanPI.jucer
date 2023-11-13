@@ -7,21 +7,15 @@
               pluginCharacteristicsValue="pluginWantsMidiIn" pluginVST3Category="Sampler,Stereo,Tools">
   <MAINGROUP id="ZiDpHY" name="LoopmanPI">
     <GROUP id="{0FC14CAC-B65A-47C8-EC68-17A2D99813CF}" name="Assets">
-      <FILE id="NnJOC1" name="background.png" compile="0" resource="1" file="Source/Assets/background.png"/>
-      <FILE id="dxzIXY" name="knob.png" compile="0" resource="1" file="Source/Assets/knob.png"/>
-      <FILE id="wnKv7w" name="loopButton.png" compile="0" resource="1" file="Source/Assets/loopButton.png"/>
-      <FILE id="BKa0FL" name="redoButton.png" compile="0" resource="1" file="Source/Assets/redoButton.png"/>
-      <FILE id="ghs78D" name="stopButton.png" compile="0" resource="1" file="Source/Assets/stopButton.png"/>
-      <FILE id="nA0pWI" name="undoButton.png" compile="0" resource="1" file="Source/Assets/undoButton.png"/>
+      <FILE id="xrO5jo" name="background.png" compile="0" resource="1" file="Source/Assets/background.png"/>
+      <FILE id="oDWiDy" name="buttonBlank.png" compile="0" resource="1" file="Source/Assets/buttonBlank.png"/>
     </GROUP>
     <GROUP id="{1A7E6732-E380-29B3-FB53-191D0ED3CB17}" name="Source">
-      <FILE id="YS4my6" name="LoopPosition.cpp" compile="1" resource="0"
-            file="Source/LoopPosition.cpp"/>
+      <FILE id="uCv6cn" name="LoopmanMemoryBar.h" compile="0" resource="0"
+            file="Source/LoopmanMemoryBar.h"/>
       <FILE id="uw3eT9" name="LoopPosition.h" compile="0" resource="0" file="Source/LoopPosition.h"/>
-      <FILE id="q2yqmw" name="LoopmanKnob.cpp" compile="1" resource="0" file="Source/LoopmanKnob.cpp"/>
       <FILE id="TRzsXn" name="LoopmanKnob.h" compile="0" resource="0" file="Source/LoopmanKnob.h"/>
       <FILE id="acYIY3" name="Looper.h" compile="0" resource="0" file="Source/Looper.h"/>
-      <FILE id="iAvWFa" name="Looper.cpp" compile="1" resource="0" file="Source/Looper.cpp"/>
       <FILE id="yuyhLn" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="Z2IpFS" name="PluginProcessor.h" compile="0" resource="0"
