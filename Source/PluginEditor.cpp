@@ -45,7 +45,7 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProc
     addAndMakeVisible(stopButton);
     stopButton.setBounds(stopButtonBounds);
     stopButton.setImages(false, false, false, buttonBlankImage.getClippedImage(stopButtonBounds), 0.0f, {}, {}, 0.0f, {}, {}, 0.7f, {});
-    stopButton.onClick = [this]() { looper->stopLoop(); };
+    stopButton.onClick = [this]() { looper->stopClick(); };
 
     // undo button
     addAndMakeVisible(undoButton);

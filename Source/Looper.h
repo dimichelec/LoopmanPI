@@ -19,7 +19,7 @@ public:
     void resetLoop()
     {
         buffer.clear();
-        playHead = numLoops = maxRedoLoops = loopStart[0] = loopEnd[0] = 0;
+        playHead = numLoops = recordedLoops = loopStart[0] = loopEnd[0] = 0;
         playState = recordState = false;
     }
 
@@ -45,17 +45,13 @@ public:
             if (numLoops == 1) playHead = 0;
             playState = true;
             recordState = false;
+            recordedLoops = numLoops;
         }
         else // playState
         {
-            int nextPos = loopSize() * numLoops;
-            if ((++numLoops > maxLoops) || (nextPos >= bufferSize))
-            {
-                nextPos = 0;
-                numLoops = 1;
-                maxRedoLoops = 0;
-            }
-            maxRedoLoops++;
+            if (numLoops >= maxLoops) return;
+            if (bufferSize < (loopSize() * (numLoops + 1))) return;
+            int nextPos = loopSize() * numLoops++;
             buffer.clear(nextPos, loopSize());
             loopStart[numLoops - 1] = nextPos;
             loopEnd[numLoops - 1] = nextPos + playHead;
@@ -64,7 +60,7 @@ public:
         repaintRequest = true;
     }
 
-    void stopLoop()
+    void stopClick()
     {
         if (!playState && !recordState)
         {
@@ -79,8 +75,8 @@ public:
             else
             {
                 loopEnd[numLoops - 1] = loopStart[numLoops - 1] + loopEnd[0];
-                maxRedoLoops++;
             }
+            recordedLoops = numLoops;
             playHead = 0;
             recordState = false;
             playState = true;
@@ -99,15 +95,11 @@ public:
 
     void redoClick()
     {
-        if ((maxRedoLoops > 0) && !recordState)
-        {
-            numLoops++;
-            maxRedoLoops--;
-        }
+        if ((numLoops < recordedLoops) && !recordState) numLoops++;
     }
 
     double getUsage() {
-        return (double)loopEnd[ numLoops-1 ] / (double)buffer.getNumSamples();
+        return (numLoops < 1) ? 0 : (double)loopEnd[ numLoops-1 ] / (double)buffer.getNumSamples();
     }
 
     float getPlayPosition() {
@@ -136,6 +128,7 @@ public:
     void addLoopSample(int channel, float sample)
     {
         if (!recordState) return;
+        if (loopEnd[numLoops - 1] >= buffer.getNumSamples()) return;
         buffer.addSample(channel, loopEnd[numLoops - 1]++, sample);
         //buffer.setSample(channel, loopEnd[numLoops - 1]++, sample);
         if (loopEnd[numLoops - 1] >= bufferSize)
@@ -154,11 +147,11 @@ public:
         return sample;
     }
 
-    static const int maxLoops{ 10 };
+    static const int maxLoops{ 20 };
 
     int playHead{ 0 };
     int numLoops{ 0 };
-    int maxRedoLoops{ 0 };
+    int recordedLoops{ 0 };
     int loopStart[maxLoops]{ };
     int loopEnd[maxLoops]{ };
     int loopSize() { return ((numLoops == 0) ? 0 : loopEnd[0] + 1); }
