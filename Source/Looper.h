@@ -130,7 +130,6 @@ public:
         if (!recordState) return;
         if (loopEnd[numLoops - 1] >= buffer.getNumSamples()) return;
         buffer.addSample(channel, loopEnd[numLoops - 1]++, sample);
-        //buffer.setSample(channel, loopEnd[numLoops - 1]++, sample);
         if (loopEnd[numLoops - 1] >= bufferSize)
             loopEnd[numLoops - 1] = loopStart[numLoops - 1];
         if ((numLoops > 1) && (loopEnd[numLoops - 1] >= (loopStart[numLoops - 1] + loopSize())))
