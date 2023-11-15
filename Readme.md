@@ -7,7 +7,7 @@ LoopmanPI is an open source looper audio plug-in written by [Carmen DiMichele](h
 
 This C++ [JUCE](https://juce.com/) framework audio plug-in is somewhat based on my earlier standalone audio app [loopman](https://github.com/dimichelec/loopman).
 
-![LoopmanPI](Screenshot 1.png "LoopmanPI screenshot")
+![LoopmanPI]("Screenshot 1.png" "LoopmanPI screenshot")
 
 ---
 # License
