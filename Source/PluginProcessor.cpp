@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
 //==============================================================================
 LoopmanPIAudioProcessor::LoopmanPIAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -28,12 +29,16 @@ LoopmanPIAudioProcessor::LoopmanPIAudioProcessor()
         std::make_unique<juce::AudioParameterBool> ("undoButton","Undo Button", false),
         std::make_unique<juce::AudioParameterBool> ("redoButton","Redo Button", false)
     })
+
 {
 }
+
 
 LoopmanPIAudioProcessor::~LoopmanPIAudioProcessor()
 {
 }
+
+
 
 //==============================================================================
 const juce::String LoopmanPIAudioProcessor::getName() const

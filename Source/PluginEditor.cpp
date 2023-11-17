@@ -38,25 +38,25 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProc
     // loop button
     addAndMakeVisible(loopButton);
     loopButton.setBounds(loopButtonBounds);
-    loopButton.setImages(false, false, false, buttonBlankImage.getClippedImage(loopButtonBounds), 0.0f, {}, {}, 0.0f, {}, {}, 0.7f, {});
+    loopButton.setBlankImage(buttonBlankImage.getClippedImage(loopButtonBounds));
     loopButton.onClick = [this]() { looper->loopClick(); };
 
     // stop button
     addAndMakeVisible(stopButton);
     stopButton.setBounds(stopButtonBounds);
-    stopButton.setImages(false, false, false, buttonBlankImage.getClippedImage(stopButtonBounds), 0.0f, {}, {}, 0.0f, {}, {}, 0.7f, {});
+    stopButton.setBlankImage(buttonBlankImage.getClippedImage(stopButtonBounds));
     stopButton.onClick = [this]() { looper->stopClick(); };
 
     // undo button
     addAndMakeVisible(undoButton);
     undoButton.setBounds(undoButtonBounds);
-    undoButton.setImages(false, false, false, buttonBlankImage.getClippedImage(undoButtonBounds), 0.0f, {}, {}, 0.0f, {}, {}, 0.7f, {});
+    undoButton.setBlankImage(buttonBlankImage.getClippedImage(undoButtonBounds));
     undoButton.onClick = [this]() { looper->undoClick(); };
 
     // redo button
     addAndMakeVisible(redoButton);
     redoButton.setBounds(redoButtonBounds);
-    redoButton.setImages(false, false, false, buttonBlankImage.getClippedImage(redoButtonBounds), 0.0f, {}, {}, 0.0f, {}, {}, 0.7f, {});
+    redoButton.setBlankImage(buttonBlankImage.getClippedImage(redoButtonBounds));
     redoButton.onClick = [this]() { looper->redoClick(); };
 
     // memory usage bar

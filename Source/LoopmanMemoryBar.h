@@ -12,6 +12,9 @@
 
 #include <JuceHeader.h>
 
+
+using Rectangle = juce::Rectangle<int>;
+
 //==============================================================================
 /*
 */
@@ -38,13 +41,13 @@ public:
         const int fontHeight = (int)g.getCurrentFont().getHeight();
         const int fontOffset = 2;
         g.drawText(txt,
-            juce::Rectangle<int>(0, getHeight() - fontHeight - fontOffset, getWidth(), fontHeight), juce::Justification::centred, false);
+            Rectangle(0, getHeight() - fontHeight - fontOffset, getWidth(), fontHeight), juce::Justification::centred, false);
 
         // draw memory usage bar
         g.setColour(labelColor);
         g.fillRect(trackBounds);
         g.setColour(barColor);
-        juce::Rectangle<int> bar{ trackBounds - getBounds().getPosition() };
+        Rectangle bar{ trackBounds - getBounds().getPosition() };
         int newHeight = (int)((double)bar.getHeight() * getValue());
         if ((newHeight == 0) && (getValue() > 0)) newHeight = 1;
         bar.translate(0, bar.getHeight() - newHeight + 1);
@@ -65,14 +68,14 @@ public:
     }
 
     void setLabel(juce::String txt) { label = txt; }
-    void setTrackBounds(juce::Rectangle<int> bounds) { trackBounds = bounds; }
+    void setTrackBounds(Rectangle bounds) { trackBounds = bounds; }
 
 private:
     bool paintLabel{ true };
     juce::String label;
     const juce::Colour labelColor = juce::Colour(0xff2d1111);
 
-    juce::Rectangle<int> trackBounds;
+    Rectangle trackBounds;
     const juce::Colour barColor = juce::Colours::green;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LoopmanMemoryBar)

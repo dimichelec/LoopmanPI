@@ -11,6 +11,8 @@
       <FILE id="oDWiDy" name="buttonBlank.png" compile="0" resource="1" file="Source/Assets/buttonBlank.png"/>
     </GROUP>
     <GROUP id="{1A7E6732-E380-29B3-FB53-191D0ED3CB17}" name="Source">
+      <FILE id="WfYqOi" name="LoopmanMomentaryButton.h" compile="0" resource="0"
+            file="Source/LoopmanMomentaryButton.h"/>
       <FILE id="uCv6cn" name="LoopmanMemoryBar.h" compile="0" resource="0"
             file="Source/LoopmanMemoryBar.h"/>
       <FILE id="uw3eT9" name="LoopPosition.h" compile="0" resource="0" file="Source/LoopPosition.h"/>

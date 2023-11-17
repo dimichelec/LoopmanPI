@@ -12,6 +12,8 @@
 
 #include <JuceHeader.h>
 
+using Rectangle = juce::Rectangle<int>;
+
 //==============================================================================
 /*
 */
@@ -38,7 +40,8 @@ public:
         const int fontHeight = (int)g.getCurrentFont().getHeight();
         const int fontOffset = 5;
         g.drawText(txt,
-            juce::Rectangle<int>(0, getHeight() - fontHeight - fontOffset, getWidth(), fontHeight), juce::Justification::centred, false);
+            Rectangle(0, getHeight() - fontHeight - fontOffset, getWidth(), fontHeight),
+            juce::Justification::centred, false);
 
         // draw the knob dot
         float dotDistance = 0.40f;

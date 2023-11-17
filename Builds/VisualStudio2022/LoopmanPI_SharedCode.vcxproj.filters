@@ -3033,6 +3033,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LoopmanMomentaryButton.h">
+      <Filter>LoopmanPI\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\LoopmanMemoryBar.h">
       <Filter>LoopmanPI\Source</Filter>
     </ClInclude>

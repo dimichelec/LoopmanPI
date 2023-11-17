@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FILTERGRAPH>
-  <FILTER uid="1" x="0.5" y="0.1" useARA="0">
+  <FILTER uid="1" x="0.13125" y="0.0975609756097561" useARA="0">
     <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uniqueId="246006c0"
             isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
@@ -16,7 +16,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="2" x="0.25125" y="0.09959349593495935" useARA="0">
+  <FILTER uid="2" x="0.25125" y="0.08536585365853659" useARA="0">
     <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uniqueId="a9e4f9eb"
             isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
@@ -61,7 +61,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="6" x="0.23875" y="0.2967479674796748" useARA="0">
+  <FILTER uid="6" x="0.29625" y="0.2195121951219512" useARA="0">
     <PLUGIN name="Sine Wave Synth" format="Internal" category="Synth" manufacturer="JUCE"
             version="1.0.0" file="Sine Wave Synth" uniqueId="16fd76a8" isInstrument="1"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
@@ -74,11 +74,13 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="10" x="0.325" y="0.4939024390243902" useARA="0" uiLastX_Normal="365"
-          uiLastY_Normal="238" uiopen_Normal="1">
+  <FILTER uid="10" x="0.34375" y="0.5873983739837398" useARA="0" uiLastX_Normal="365"
+          uiLastY_Normal="238" uiopen_Normal="1" uiLastX_Generic="335"
+          uiLastY_Generic="92" uiopen_Generic="0" uiLastX_IO="837" uiLastY_IO="639"
+          uiopen_IO="0">
     <PLUGIN name="LoopmanPI" format="VST3" category="Fx|Sampler|Stereo|Tools"
             manufacturer="Carmen DiMichele" version="1.0.0" file="E:\Code Projects\LoopmanPI\Builds\VisualStudio2022\x64\Debug\VST3\LoopmanPI.vst3\Contents\x86_64-win\LoopmanPI.vst3"
-            uniqueId="ef9ba320" isInstrument="0" fileTime="18bca864079" infoUpdateTime="18bca8b79e2"
+            uniqueId="ef9ba320" isInstrument="0" fileTime="18bddfd4e5d" infoUpdateTime="18bde008603"
             numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
             uid="e9520284"/>
     <STATE>635.VMjLgHm....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9LSNx3hUMoFSmwDUt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSEUUPQUUp8zMtTETRUDUSYlZFkENHgVVqUkQYgVQwfUbIIDRwTjQgASUV8DZtj1RwPzPLYmKCwjcDMTS44xTMcGQC0jLHg2R4X2PTETRUAUSAIkVpASZH0VQVoEcIIDRwTjQgASUV8DZDk1R1gDdKkicCQUPIUETMEjTZoFLogzbqYDYn4BZic1cVM1ZvjFR1MCZMAiZS4DMpMkSwfUZMgGQ4wDMlMkSncCZOciKUAkTEQ0TlolQYgCRBEVc3XjXLUEais1crgjYXcEVxU0UYgCRBwDcXkFSzn1TNQiZS4DLHkGS2gUZLMCTogTcyLzSPUjZTEDLDgzaQY0SnYWLgUWPsAELQczX0QCaHU2LC8DTEoFUAACQH8VTV8DZLczX0ETaPASTGMVczvFR0MyPOAUQpQUPvPDRuEkUOgFRWkkZ3vFTvD0QiUGMrgTcyLzSPUjZTEDLDgzaQY0SnQUagoFNrAELQczX0QCaHU2LC8TcLUTUAEUUQkiKt3hKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDTtDDRTQlcEEiX4EDTtDDSt3xXt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQ77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
@@ -91,12 +93,25 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <CONNECTION srcFilter="1" srcChannel="1" dstFilter="10" dstChannel="1"/>
+  <FILTER uid="11" x="0.3775" y="0.3638211382113821" useARA="0" uiLastX_Normal="202"
+          uiLastY_Normal="397" uiopen_Normal="0">
+    <PLUGIN name="MIDI Logger" format="Internal" category="Synth" manufacturer="JUCE"
+            version="1.0.0" file="MIDI Logger" uniqueId="97e2978f" isInstrument="1"
+            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
+            isShell="0" hasARAExtension="0" uid="97e2978f"/>
+    <STATE>98.VMjLgjE....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOyQWXzUlO7TWZSQWXzUFH2kFYzgVOhXCLvHBHnUVZmgFc8HxLv.iHu3COuLGcgQWY9..</STATE>
+    <LAYOUT>
+      <INPUTS/>
+      <OUTPUTS/>
+    </LAYOUT>
+  </FILTER>
+  <CONNECTION srcFilter="1" srcChannel="1" dstFilter="10" dstChannel="0"/>
   <CONNECTION srcFilter="2" srcChannel="4096" dstFilter="6" dstChannel="4096"/>
-  <CONNECTION srcFilter="6" srcChannel="1" dstFilter="10" dstChannel="0"/>
-  <CONNECTION srcFilter="6" srcChannel="4096" dstFilter="10" dstChannel="4096"/>
+  <CONNECTION srcFilter="6" srcChannel="1" dstFilter="10" dstChannel="1"/>
+  <CONNECTION srcFilter="6" srcChannel="4096" dstFilter="11" dstChannel="4096"/>
   <CONNECTION srcFilter="10" srcChannel="0" dstFilter="3" dstChannel="0"/>
   <CONNECTION srcFilter="10" srcChannel="0" dstFilter="3" dstChannel="1"/>
   <CONNECTION srcFilter="10" srcChannel="1" dstFilter="3" dstChannel="0"/>
   <CONNECTION srcFilter="10" srcChannel="1" dstFilter="3" dstChannel="1"/>
+  <CONNECTION srcFilter="11" srcChannel="4096" dstFilter="10" dstChannel="4096"/>
 </FILTERGRAPH>

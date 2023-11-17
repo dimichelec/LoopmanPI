@@ -2405,6 +2405,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LoopmanMomentaryButton.h"/>
     <ClInclude Include="..\..\Source\LoopmanMemoryBar.h"/>
     <ClInclude Include="..\..\Source\LoopPosition.h"/>
     <ClInclude Include="..\..\Source\LoopmanKnob.h"/>
