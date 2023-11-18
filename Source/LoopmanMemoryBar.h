@@ -12,8 +12,9 @@
 
 #include <JuceHeader.h>
 
-
+using String = juce::String;
 using Rectangle = juce::Rectangle<int>;
+using Colour = juce::Colour;
 
 //==============================================================================
 /*
@@ -35,7 +36,7 @@ public:
     void paint (juce::Graphics& g) override
     {
         // draw text
-        juce::String txt = (paintLabel) ? label : juce::String(getValue() * 100, 1) + "%";
+        String txt = (paintLabel) ? label : String(getValue() * 100, 1) + "%";
         g.setColour(labelColor);
         g.setFont(20.0f);
         const int fontHeight = (int)g.getCurrentFont().getHeight();
@@ -67,16 +68,16 @@ public:
         paintLabel = true;
     }
 
-    void setLabel(juce::String txt) { label = txt; }
+    void setLabel(String txt) { label = txt; }
     void setTrackBounds(Rectangle bounds) { trackBounds = bounds; }
 
 private:
     bool paintLabel{ true };
-    juce::String label;
-    const juce::Colour labelColor = juce::Colour(0xff2d1111);
+    String label;
+    const Colour labelColor = Colour(0xff2d1111);
 
     Rectangle trackBounds;
-    const juce::Colour barColor = juce::Colours::green;
+    const Colour barColor = juce::Colours::green;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LoopmanMemoryBar)
 };

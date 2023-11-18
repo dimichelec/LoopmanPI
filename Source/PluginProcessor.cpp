@@ -23,11 +23,12 @@ LoopmanPIAudioProcessor::LoopmanPIAudioProcessor()
                        )
 #endif
     , state (*this, nullptr, "STATE", {
-        std::make_unique<juce::AudioParameterFloat>("loopLevel", "Loop Level",  0.0f, 1.0f, 1.0f),
-        std::make_unique<juce::AudioParameterBool> ("loopButton","Loop Button", false),
-        std::make_unique<juce::AudioParameterBool> ("stopButton","Stop Button", false),
-        std::make_unique<juce::AudioParameterBool> ("undoButton","Undo Button", false),
-        std::make_unique<juce::AudioParameterBool> ("redoButton","Redo Button", false)
+        std::make_unique<juce::AudioParameterFloat>("loopLevel",        "Loop Level",       0.0f, 1.0f, 1.0f),
+        std::make_unique<juce::AudioParameterBool> ("loopButton",       "Loop Button",      false),
+        std::make_unique<juce::AudioParameterBool> ("stopButton",       "Stop Button",      false),
+        std::make_unique<juce::AudioParameterBool> ("fadeoutButton",    "FadeOut Button",   false),
+        std::make_unique<juce::AudioParameterBool> ("undoButton",       "Undo Button",      false),
+        std::make_unique<juce::AudioParameterBool> ("redoButton",       "Redo Button",      false)
     })
 
 {
@@ -94,12 +95,12 @@ void LoopmanPIAudioProcessor::setCurrentProgram (int) // index)
 
 }
 
-const juce::String LoopmanPIAudioProcessor::getProgramName (int) // index)
+const String LoopmanPIAudioProcessor::getProgramName (int) // index)
 {
     return {};
 }
 
-void LoopmanPIAudioProcessor::changeProgramName (int, const juce::String&) // index, newName)
+void LoopmanPIAudioProcessor::changeProgramName (int, const String&) // index, newName)
 {
 
 }
@@ -167,7 +168,7 @@ void LoopmanPIAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         for (auto i = 0; i < buffer.getNumSamples(); i++)
         {
             auto drySample = channelData[i];
-            channelData[i] = drySample + (loopLevel * looper.getPlaySample(channel));
+            channelData[i] = looper.getFadeoutGain() * (drySample + (loopLevel * looper.getPlaySample(channel)));
             looper.addLoopSample(channel, drySample);
         }
     }

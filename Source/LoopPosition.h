@@ -13,6 +13,9 @@
 #include <JuceHeader.h>
 #include "Looper.h"
 
+using Colour = juce::Colour;
+using String = juce::String;
+
 //==============================================================================
 /*
 */
@@ -25,10 +28,10 @@ public:
     void paint(juce::Graphics& g) override
     {
         // update playState label
-        juce::String txt{ "" };
+        String txt{ "" };
         auto loops = looper->numLoops;
         if (loops > 0)
-            txt = juce::String(loops) + " loop" + ((loops > 1) ? "s" : "");
+            txt = String(loops) + " loop" + ((loops > 1) ? "s" : "");
         g.setColour(labelColor);
         g.setFont(20.0f);
         g.drawText(txt, getBounds(), juce::Justification::centred, true);
@@ -54,7 +57,10 @@ public:
             stroke.setEndStyle(juce::PathStrokeType::EndCapStyle::rounded);
             juce::Path path;
             path.addCentredArc(cx, cy, rad, rad, 0, 0, pos * 2 * juce::float_Pi, true);
-            g.setColour((looper->isRecording()) ? juce::Colours::red : juce::Colours::green);
+            Colour c = juce::Colours::green;
+            if (looper->isRecording()) c = juce::Colours::red;
+            else if (looper->isFadingout()) c = juce::Colours::goldenrod;
+            g.setColour(c);
             g.strokePath(path, stroke);
         }
     }
@@ -65,7 +71,7 @@ public:
 
 private:
     Looper* looper{};
-    const juce::Colour labelColor = juce::Colour(0xff2d1111);
+    const Colour labelColor = Colour(0xff2d1111);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LoopPosition)
 };

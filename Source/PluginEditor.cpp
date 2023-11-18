@@ -9,20 +9,22 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+using ImageCache = juce::ImageCache;
 
 //==============================================================================
-LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProcessor& p)
+LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor(LoopmanPIAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
-        loopLevelAttachment (p.state, "loopLevel",  loopLevelKnob),
-        loopButtonAttachment(p.state, "loopButton", loopButton),
-        stopButtonAttachment(p.state, "stopButton", stopButton),
-        undoButtonAttachment(p.state, "undoButton", undoButton),
-        redoButtonAttachment(p.state, "redoButton", redoButton)
+        loopLevelAttachment     (p.state, "loopLevel",      loopLevelKnob),
+        loopButtonAttachment    (p.state, "loopButton",     loopButton),
+        stopButtonAttachment    (p.state, "stopButton",     stopButton),
+        fadeoutButtonAttachment (p.state, "fadeoutButton",  fadeoutButton),
+        undoButtonAttachment    (p.state, "undoButton",     undoButton),
+        redoButtonAttachment    (p.state, "redoButton",     redoButton)
 {
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
+    backgroundImage = ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
     setSize(backgroundImage.getWidth() / backgroundScale, backgroundImage.getHeight() / backgroundScale);
 
-    buttonBlankImage = juce::ImageCache::getFromMemory(BinaryData::buttonBlank_png, BinaryData::buttonBlank_pngSize).rescaled(
+    buttonBlankImage = ImageCache::getFromMemory(BinaryData::buttonBlank_png, BinaryData::buttonBlank_pngSize).rescaled(
         getWidth(), getHeight()
     );
 
@@ -39,13 +41,19 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor (LoopmanPIAudioProc
     addAndMakeVisible(loopButton);
     loopButton.setBounds(loopButtonBounds);
     loopButton.setBlankImage(buttonBlankImage.getClippedImage(loopButtonBounds));
-    loopButton.onClick = [this]() { looper->loopClick(); };
+    loopButton.onClick = [this]() { looper->setFadeoutGain(1.0f); looper->loopClick(); };
 
     // stop button
     addAndMakeVisible(stopButton);
     stopButton.setBounds(stopButtonBounds);
     stopButton.setBlankImage(buttonBlankImage.getClippedImage(stopButtonBounds));
     stopButton.onClick = [this]() { looper->stopClick(); };
+
+    // fadeout button
+    addAndMakeVisible(fadeoutButton);
+    fadeoutButton.setBounds(fadeoutButtonBounds);
+    fadeoutButton.setBlankImage(buttonBlankImage.getClippedImage(fadeoutButtonBounds));
+    fadeoutButton.onClick = [this]() { looper->fadeoutClick(); };
 
     // undo button
     addAndMakeVisible(undoButton);
@@ -75,7 +83,7 @@ LoopmanPIAudioProcessorEditor::~LoopmanPIAudioProcessorEditor()
 
 
 //==============================================================================
-void LoopmanPIAudioProcessorEditor::paint (juce::Graphics& g)
+void LoopmanPIAudioProcessorEditor::paint(juce::Graphics& g)
 {
     g.fillAll(juce::Colours::white);
     g.drawImageWithin(backgroundImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);

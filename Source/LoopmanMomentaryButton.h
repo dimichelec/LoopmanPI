@@ -12,6 +12,8 @@
 
 #include <JuceHeader.h>
 
+using Image = juce::Image;
+
 //==============================================================================
 /*
 */
@@ -36,13 +38,11 @@ public:
         }
 
         if (blankImage.isValid())
-            getLookAndFeel().drawImageButton(g, &blankImage, 0, 0, blankImage.getWidth(), blankImage.getHeight(), {}, (shouldDrawButtonAsDown ? 0.7f : 0.0f), *this);
+            getLookAndFeel().drawImageButton(g, &blankImage, 0, 0, blankImage.getWidth(), blankImage.getHeight(), 
+                {}, (shouldDrawButtonAsDown ? buttonDownOpacity : 0.0f), *this);
     }
 
-    void setBlankImage(juce::Image& im)
-    {
-        blankImage = im;
-    }
+    void setBlankImage(Image image) { blankImage = image; }
 
     void resized() override
     {
@@ -52,6 +52,8 @@ public:
     }
 
 private:
-    juce::Image blankImage;
+    Image blankImage;
+    float buttonDownOpacity{ 0.7f };
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LoopmanMomentaryButton)
 };
