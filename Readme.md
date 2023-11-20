@@ -29,7 +29,11 @@ Coding Notes:
 
 - https://github.com/dimichelec/LoopmanPI
 
-* make a fade-out button
+* make fadeout button fadein when not playing
+* press stop after fadeout complete to reset output gain
+* there's a bug that breaks recording somehow--not sure how to repro it. last time i hit stop after fadeout
+* make recording more efficient
+  * add multiple scenes
   
 -------------------------------------------------------------------- -->
 
