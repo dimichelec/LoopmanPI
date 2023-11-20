@@ -26,6 +26,7 @@ public:
 
     void loopClick()
     {
+        setFadeoutGain(1.0f);
         if (!playState && !recordState)
         {
             if (numLoops == 0)
@@ -97,6 +98,11 @@ public:
 
     void stopClick()
     {
+        if (fadeoutGain != 1.0f)
+        {
+            setFadeoutGain(1.0f);
+            return;
+        }
         if (!playState && !recordState)
         {
             resetLoop();

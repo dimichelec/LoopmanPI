@@ -41,7 +41,7 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor(LoopmanPIAudioProce
     addAndMakeVisible(loopButton);
     loopButton.setBounds(loopButtonBounds);
     loopButton.setBlankImage(buttonBlankImage.getClippedImage(loopButtonBounds));
-    loopButton.onClick = [this]() { looper->setFadeoutGain(1.0f); looper->loopClick(); };
+    loopButton.onClick = [this]() { looper->loopClick(); };
 
     // stop button
     addAndMakeVisible(stopButton);
