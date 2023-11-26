@@ -34,6 +34,10 @@ Coding Notes:
 * make recording more efficient
   * add multiple scenes
   
+loop position:
+  - on faded out: full circle orange
+  
+
 -------------------------------------------------------------------- -->
 
 
