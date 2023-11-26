@@ -33,10 +33,6 @@ Coding Notes:
 * there's a bug that breaks recording somehow--not sure how to repro it. last time i hit stop after fadeout
 * make recording more efficient
   * add multiple scenes
-  
-loop position:
-  - on faded out: full circle orange
-  
 
 -------------------------------------------------------------------- -->
 
