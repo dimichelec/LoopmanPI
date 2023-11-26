@@ -24,6 +24,7 @@ LoopmanPIAudioProcessor::LoopmanPIAudioProcessor()
 #endif
     , state (*this, nullptr, "STATE", {
         std::make_unique<juce::AudioParameterFloat>("loopLevel",        "Loop Level",       0.0f, 1.0f, 1.0f),
+        std::make_unique<juce::AudioParameterFloat>("outputLevel",      "Output Level",     0.0f, 1.0f, 1.0f),
         std::make_unique<juce::AudioParameterBool> ("loopButton",       "Loop Button",      false),
         std::make_unique<juce::AudioParameterBool> ("stopButton",       "Stop Button",      false),
         std::make_unique<juce::AudioParameterBool> ("fadeoutButton",    "FadeOut Button",   false),
@@ -159,7 +160,8 @@ void LoopmanPIAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         buffer.clear (i, 0, buffer.getNumSamples());
 
     // get control settings
-    auto loopLevel = state.getParameter("loopLevel")->getValue();
+    auto loopLevel =    state.getParameter("loopLevel")->getValue();
+    auto outputLevel =  state.getParameter("outputLevel")->getValue();
 
     // process the loop buffer
     for (auto channel = 0; channel < totalNumInputChannels; ++channel)
@@ -168,7 +170,7 @@ void LoopmanPIAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
         for (auto i = 0; i < buffer.getNumSamples(); i++)
         {
             auto drySample = channelData[i];
-            channelData[i] = looper.getFadeoutGain() * (drySample + (loopLevel * looper.getPlaySample(channel)));
+            channelData[i] = outputLevel * looper.getFadeoutGain() * (drySample + (loopLevel * looper.getPlaySample(channel)));
             looper.addLoopSample(channel, drySample);
         }
     }

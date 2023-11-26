@@ -31,20 +31,16 @@ public:
         String txt{ "" };
         auto loops = looper->numLoops;
         if (loops > 0)
-            txt = String(loops) + " loop" + ((loops > 1) ? "s" : "");
+            txt = String(loops) + ((label == "") ? "" : " " + label + ((loops > 1) ? "s" : ""));
         g.setColour(labelColor);
-        g.setFont(20.0f);
-        g.drawText(txt, getBounds(), juce::Justification::centred, true);
+        g.setFont(labelSize);
+        g.drawText(txt, getBounds().translated(labelOffsetX, labelOffsetY), juce::Justification::centred, true);
 
         // draw loop poisiton
-        float trackWeight = 7.0f;
         float x0 = (float)getX(), y0 = (float)getY();
         float cx = x0 + (float)getWidth() / 2;
         float cy = y0 + (float)getHeight() / 2;
-        float rad = (float)getWidth() / 2 - trackWeight;
-
-        g.setColour(labelColor);
-        g.drawEllipse(cx - rad, cy - rad, rad * 2, rad * 2, trackWeight);
+        float rad = (float)getWidth() / 2 - trackWeight / 2;
 
         float pos = looper->getPlayPosition();
         if (pos < 0)
@@ -52,8 +48,9 @@ public:
             g.setColour(juce::Colours::goldenrod);
             g.drawEllipse(cx - rad, cy - rad, rad * 2, rad * 2, trackWeight);
         }
-        else {
-            juce::PathStrokeType stroke(8);
+        else
+        {
+            juce::PathStrokeType stroke(trackWeight);
             stroke.setEndStyle(juce::PathStrokeType::EndCapStyle::rounded);
             juce::Path path;
             path.addCentredArc(cx, cy, rad, rad, 0, 0, pos * 2 * juce::float_Pi, true);
@@ -67,11 +64,18 @@ public:
 
     void resized() override {}
 
-    void setLooper(Looper* ptr) { looper = ptr; }
+    void setLooper(Looper* ptr)             { looper = ptr; }
+    void setLabel(String txt, float size, Colour color) { label = txt; labelSize = size; labelColor = color; }
 
 private:
-    Looper* looper{};
-    const Colour labelColor = Colour(0xff2d1111);
+    Looper* looper          {};
+    String  label           { "" };
+    float   labelSize       { 100.0f };
+    Colour  labelColor      { juce::Colours::white };
+    int     labelOffsetX    { 1 };
+    int     labelOffsetY    { -4 };
+
+    float trackWeight       { 11.0f };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LoopPosition)
 };

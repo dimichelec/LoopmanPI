@@ -43,24 +43,26 @@ private:
 
     // background and general control things
     Image backgroundImage;
-    const int backgroundScale{ 2 };
-    const int textBoxHeight{ 26 };
+    const int backgroundScale   { 2 };
+    const int textBoxHeight     { 26 };
 
     // loop level knob
-    LoopmanKnob loopLevelKnob;
-    const Rectangle loopLevelKnobBounds{ Rectangle(378, 566, 166, 166 + textBoxHeight) / backgroundScale };
-    ValueTree::SliderAttachment loopLevelAttachment;
+    LoopmanKnob loopLevelKnob, outputLevelKnob;
+    const Rectangle loopLevelKnobBounds     { Rectangle(384, 136, 144, 144 + textBoxHeight) / backgroundScale };
+    const Rectangle outputLevelKnobBounds   { Rectangle(575, 136, 144, 144 + textBoxHeight) / backgroundScale };
+
+    ValueTree::SliderAttachment
+        loopLevelAttachment, outputLevelAttachment;
 
     // buttons
     Image buttonBlankImage;
-    const Rectangle buttonBlankBounds{ Rectangle(307, 830, 144, 108) };
 
     LoopmanMomentaryButton loopButton, stopButton, undoButton, redoButton, fadeoutButton;
-    const Rectangle loopButtonBounds    { Rectangle(385, 777, 148, 110) / backgroundScale };
-    const Rectangle stopButtonBounds    { Rectangle(388, 949, 148, 110) / backgroundScale };
-    const Rectangle fadeoutButtonBounds { Rectangle(595, 949, 148, 110) / backgroundScale };
-    const Rectangle undoButtonBounds    { Rectangle( 81, 901,  98,  98) / backgroundScale };
-    const Rectangle redoButtonBounds    { Rectangle(206, 901,  98,  98) / backgroundScale };
+    const Rectangle loopButtonBounds    { Rectangle( 26, 434, 126,  92) / backgroundScale };
+    const Rectangle stopButtonBounds    { Rectangle(180, 434, 126,  92) / backgroundScale };
+    const Rectangle fadeoutButtonBounds { Rectangle(643, 434, 126,  92) / backgroundScale };
+    const Rectangle undoButtonBounds    { Rectangle(334, 434, 126,  92) / backgroundScale };
+    const Rectangle redoButtonBounds    { Rectangle(488, 434, 126,  92) / backgroundScale };
 
     ValueTree::ButtonAttachment
         loopButtonAttachment, stopButtonAttachment, fadeoutButtonAttachment,
@@ -68,12 +70,12 @@ private:
 
     // loop position widget
     LoopPosition loopPosition;
-    const Rectangle loopPositionBounds{ Rectangle( 62, 622, 257, 257) / backgroundScale };
+    const Rectangle loopPositionBounds  { Rectangle( 45, 135, 272, 272) / backgroundScale };
 
     // memory bar widget
     LoopmanMemoryBar memorySlider;
-    const Rectangle memoryBarBounds{      Rectangle(601, 632, 134, 252) / backgroundScale };
-    const Rectangle memoryBarTrackBounds{ Rectangle(655, 636,  28, 196) / backgroundScale };
+    const Rectangle memoryBarBounds     { Rectangle(382, 326, 339,  67) / backgroundScale };
+    const Rectangle memoryBarTrackBounds{ Rectangle(387, 330, 330,  28) / backgroundScale };
 
     // timer parameters
     const int timerMilliseconds { 25 };

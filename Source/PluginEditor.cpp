@@ -15,6 +15,7 @@ using ImageCache = juce::ImageCache;
 LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor(LoopmanPIAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
         loopLevelAttachment     (p.state, "loopLevel",      loopLevelKnob),
+        outputLevelAttachment   (p.state, "outputLevel",    outputLevelKnob),
         loopButtonAttachment    (p.state, "loopButton",     loopButton),
         stopButtonAttachment    (p.state, "stopButton",     stopButton),
         fadeoutButtonAttachment (p.state, "fadeoutButton",  fadeoutButton),
@@ -35,7 +36,12 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor(LoopmanPIAudioProce
     // loop level knob
     addAndMakeVisible(loopLevelKnob);
     loopLevelKnob.setBounds(loopLevelKnobBounds);
-    loopLevelKnob.setLabel("Level");
+    loopLevelKnob.setLabel("Level", 18.0f, juce::Colours::white);
+
+    // output level knob
+    addAndMakeVisible(outputLevelKnob);
+    outputLevelKnob.setBounds(outputLevelKnobBounds);
+    outputLevelKnob.setLabel("Output", 18.0f, juce::Colours::white);
 
     // loop button
     addAndMakeVisible(loopButton);
@@ -71,7 +77,7 @@ LoopmanPIAudioProcessorEditor::LoopmanPIAudioProcessorEditor(LoopmanPIAudioProce
     addAndMakeVisible(memorySlider);
     memorySlider.setBounds(memoryBarBounds);
     memorySlider.setTrackBounds(memoryBarTrackBounds);
-    memorySlider.setLabel("Memory");
+    memorySlider.setLabel("Memory", 18.0f, juce::Colours::white);
 
     // set a timer for servicing the UI periodically
     startTimer(timerMilliseconds);
